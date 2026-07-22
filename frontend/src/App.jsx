@@ -13,11 +13,15 @@ export default function App() {
     setError('');
     setResult(null);
     try {
-      const res = await fetch('/api/analyze', {
+      // ✅ FIX: Frontend ab direct Node.js Backend ko call karega
+      const API_URL = import.meta.env.VITE_API_URL || 'https://brand-intel-app.onrender.com';
+      
+      const res = await fetch(`${API_URL}/api/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
       });
+      
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
       setResult(data);

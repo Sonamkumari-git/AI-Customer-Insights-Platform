@@ -1,0 +1,1 @@
+{"backbone": "distilbert-base-uncased", "emotion_labels": ["Happy", "Angry", "Sad", "Frustrated", "Neutral"], "topic_labels": ["Pricing", "UI", "Service", "Quality", "Delivery", "Support"]}

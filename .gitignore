@@ -1,0 +1,14 @@
+# Python virtual environments & cache
+.venv/
+venv/
+__pycache__/
+
+# Node.js dependencies
+node_modules/
+.env
+
+# Large Trained Model files (Local storage free rakhne ke liye)
+ml-service/model/*.safetensors
+ml-service/model/*.bin
+ml-service/model/*.pt
+trained_model.zip

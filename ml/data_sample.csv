@@ -1,0 +1,31 @@
+text,emotion,topics
+"The price is way too high for what you get, terrible value.",Angry,Pricing
+"Absolutely love the new interface, so clean and easy to use!",Happy,UI
+"Customer support was rude and never resolved my issue.",Frustrated,Service|Support
+"Delivery arrived two weeks late and the box was crushed.",Sad,Delivery|Quality
+"Nothing special, the app works I guess.",Neutral,UI
+"Amazing build quality and it shipped in two days.",Happy,Quality|Delivery
+"I keep getting logged out. The UI is glitchy and support is unreachable.",Frustrated,UI|Support
+"Great value for the money, very affordable.",Happy,Pricing
+"The website design is confusing and cluttered.",Sad,UI
+"Product broke after one week. Very disappointing quality.",Angry,Quality
+"Support agent solved my problem in five minutes, great service.",Happy,Support|Service
+"Delivery was on time, product is average.",Neutral,Delivery|Quality
+"Charged twice, no refund yet. Furious!",Angry,Pricing|Support
+"The checkout flow is smooth, love the redesign.",Happy,UI
+"Package never arrived. Support ghosted me.",Angry,Delivery|Support
+"Fair price, decent quality, nothing to complain about.",Neutral,Pricing|Quality
+"UI is beautiful but the app crashes constantly.",Frustrated,UI|Quality
+"I feel let down by the poor customer service.",Sad,Service
+"Fantastic experience end to end, from pricing to delivery.",Happy,Pricing|Delivery|Service
+"The mobile UI is unusable on my phone.",Frustrated,UI
+"Item arrived damaged and the return policy is a nightmare.",Angry,Delivery|Quality|Support
+"Cheap and cheerful, does what it says.",Happy,Pricing|Quality
+"Support was polite but couldn't help me.",Neutral,Support
+"Late delivery again, third time this month.",Frustrated,Delivery
+"The dashboard is intuitive and fast.",Happy,UI
+"Not worth the price at all.",Sad,Pricing
+"Quality has gone downhill over the past year.",Sad,Quality
+"Best service team I've ever dealt with.",Happy,Service|Support
+"Wish they'd fix the buggy UI already.",Frustrated,UI
+"Solid product, arrived on time, reasonable price.",Happy,Delivery|Pricing|Quality

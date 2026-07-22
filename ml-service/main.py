@@ -4,8 +4,9 @@ FastAPI inference microservice.
 Loads the fine-tuned DistilBERT backbone (safetensors) plus the two heads
 (heads.safetensors) exported by ml/train.py and exposes:
 
-    GET  /health   -> liveness probe
-    POST /predict  -> body: { "text": "..." }
+    GET  /          -> root welcome message
+    GET  /health    -> liveness probe
+    POST /predict   -> body: { "text": "..." }
                        resp: { "emotion": {...}, "topics": [...] }
 
 Environment:
@@ -138,6 +139,11 @@ class PredictResponse(BaseModel):
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
+@app.get("/")
+def read_root():
+    """Root endpoint to prevent 404 errors when visiting the base URL."""
+    return {"message": "Welcome to the ML Customer Review API. System is running!"}
+
 @app.get("/health")
 def health():
     return {"status": "ok", "model_loaded": "model" in STATE}

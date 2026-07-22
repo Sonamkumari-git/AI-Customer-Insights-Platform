@@ -9,15 +9,25 @@ import morgan from 'morgan';
 import rateLimit from 'express-rate-limit';
 import axios from 'axios';
 
-const PORT           = Number(process.env.PORT || 4000);
-const ML_SERVICE_URL = process.env.ML_SERVICE_URL || 'http://localhost:8000';
-const ML_TIMEOUT_MS  = Number(process.env.ML_TIMEOUT_MS || 15000);
-const CORS_ORIGIN    = process.env.CORS_ORIGIN || 'http://localhost:5173';
+const PORT = Number(process.env.PORT || 4000);
+
+// Ensure ML_SERVICE_URL has no trailing slash
+const ML_SERVICE_URL = (process.env.ML_SERVICE_URL || 'http://localhost:8000').replace(/\/$/, '');
+const ML_TIMEOUT_MS = Number(process.env.ML_TIMEOUT_MS || 15000);
+const CORS_ORIGIN = process.env.CORS_ORIGIN || '*'; // Allows production frontend
 
 const app = express();
 
-app.use(helmet());
-app.use(cors({ origin: CORS_ORIGIN, methods: ['GET', 'POST'] }));
+// Disable cross-origin resource policy restriction for API deployment
+app.use(helmet({ crossOriginResourcePolicy: false }));
+
+// CORS configuration to support both local and production environments
+app.use(cors({ 
+  origin: CORS_ORIGIN === '*' ? true : [CORS_ORIGIN, 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json({ limit: '32kb' }));
 app.use(morgan('tiny'));
 
@@ -41,10 +51,13 @@ const ml = axios.create({
 app.get('/health', async (_req, res) => {
   try {
     const { data } = await ml.get('/health');
-    res.json({ gateway: 'ok', ml: data });
+    return res.json({ gateway: 'ok', ml: data });
   } catch (err) {
-    res.status(503).json({ gateway: 'ok', ml: 'unreachable',
-                           detail: err.message });
+    return res.status(503).json({ 
+      gateway: 'ok', 
+      ml: 'unreachable',
+      detail: err.message 
+    });
   }
 });
 
@@ -58,9 +71,13 @@ app.post('/api/analyze', analyzeLimiter, async (req, res) => {
   }
 
   try {
+    console.log(`[Gateway] Posting to ML Service: ${ML_SERVICE_URL}/predict`);
     const { data } = await ml.post('/predict', { text });
-    return res.json(data);
+    
+    // Ensure response is always sent as JSON payload
+    return res.status(200).json(data || {});
   } catch (err) {
+    console.error('[Gateway ML Error]', err.message);
     if (err.response) {
       // ML service returned an error status
       return res.status(err.response.status || 502).json({
@@ -88,6 +105,6 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Gateway listening on http://localhost:${PORT}`);
+  console.log(`Gateway listening on port ${PORT}`);
   console.log(`Forwarding to ML service at ${ML_SERVICE_URL}`);
 });

@@ -611,7 +611,7 @@ If you use this platform in your research or production environment, please cite
 ```bibtex
 @software{ai_customer_insights_2024,
   title={AI Customer Insights Platform},
-  author={Sonam Kumar},
+  author={Sonam Kumari},
   year={2024},
   url={https://github.com/Sonamkumari-git/AI-Customer-Insights-Platform}
 }

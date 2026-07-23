@@ -622,9 +622,9 @@ If you use this platform in your research or production environment, please cite
 ## Contact & Support
 
 - **GitHub Issues**: [Report bugs or feature requests](https://github.com/Sonamkumari-git/AI-Customer-Insights-Platform/issues)
-- **Author**: Sonam Kumar
-- **Email**: [Your email here]
-- **LinkedIn**: [Your profile here]
+- **Author**: Sonam Kumari
+- **Email**: 7258sonam@gmail.com
+
 
 ---
 
